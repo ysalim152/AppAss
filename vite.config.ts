@@ -9,4 +9,8 @@ export default defineConfig({
     port: 3000,
     strictPort: true,
   },
+  preview: {
+    host: '0.0.0.0',
+    allowedHosts: ['appass.onrender.com']
+  },
 });

@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply h-full bg-slate-50 text-slate-900 selection:bg-indigo-100;
+  }
+}
+
+/* Custom styles for professional scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* React Big Calendar custom integration styles */
+.rbc-calendar {
+  font-family: inherit;
+  min-height: 580px;
+  border-radius: 1rem;
+}
+
+.rbc-header {
+  padding: 10px 4px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dark .rbc-header {
+  color: #94a3b8;
+  border-bottom-color: #1e293b;
+}
+
+.rbc-month-view, .rbc-time-view, .rbc-agenda-view {
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.dark .rbc-month-view, .dark .rbc-time-view, .dark .rbc-agenda-view {
+  border-color: #1e293b;
+}
+
+.rbc-day-bg {
+  border-left: 1px solid #f1f5f9;
+}
+.dark .rbc-day-bg {
+  border-left-color: #0f172a;
+}
+
+.rbc-month-row {
+  border-top: 1px solid #f1f5f9;
+}
+.dark .rbc-month-row {
+  border-top-color: #0f172a;
+}
+
+.rbc-off-range-bg {
+  background-color: rgba(248, 250, 252, 0.6);
+}
+.dark .rbc-off-range-bg {
+  background-color: rgba(15, 23, 42, 0.4);
+}
+
+.rbc-today {
+  background-color: rgba(99, 102, 241, 0.08) !important;
+}
+
+.rbc-event {
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 3px 6px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rbc-event:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.rbc-event-content {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.rbc-agenda-view table.rbc-agenda-table {
+  border: none;
+}
+
+.rbc-agenda-view table.rbc-agenda-table tbody > tr > td {
+  padding: 10px;
+  font-size: 0.8rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.dark .rbc-agenda-view table.rbc-agenda-table tbody > tr > td {
+  border-top-color: #1e293b;
+  color: #e2e8f0;
+}
+
+.rbc-[#0d6efd] {
+  background-color: #0d6efd;
+}
+
+/* ==========================================
+   DEDICATED PRINT STYLESHEET (@media print)
+   ========================================== */
+
+/* Utility class for elements visible ONLY in print */
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  /* Page setup & margins */
+  @page {
+    margin: 12mm 12mm 12mm 12mm;
+    size: A4 portrait;
+  }
+
+  /* Reset global canvas and force high contrast */
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    min-height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+    font-size: 10pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Allow layout wrappers to unroll and extend smoothly */
+  #root,
+  .flex.h-screen,
+  main,
+  div[ref="mainContentRef"],
+  .overflow-y-auto,
+  .overflow-x-auto,
+  .overflow-hidden {
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide app navigation chrome, modals, sidebars, header, floating controls */
+  aside,
+  header,
+  nav,
+  .no-print,
+  #btn-toggle-mobile-menu,
+  #btn-toggle-theme,
+  #btn-toggle-fullscreen,
+  #btn-signout,
+  #btn-signout-mobile,
+  .fixed.inset-0:not(.print-modal),
+  .backdrop-blur-md,
+  .backdrop-blur-sm,
+  .shadow-2xl,
+  [role="dialog"]:not(.print-modal) {
+    display: none !important;
+  }
+
+  /* Hide action buttons and form inputs during list prints */
+  button:not(.print-keep),
+  a.button,
+  .action-buttons {
+    display: none !important;
+  }
+
+  /* Show elements designated for print only */
+  .print-only {
+    display: block !important;
+  }
+
+  .print-flex {
+    display: flex !important;
+  }
+
+  .print-grid {
+    display: grid !important;
+  }
+
+  /* Remove shadows and dark theme backgrounds to save printer ink */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .bg-slate-900,
+  .bg-slate-950,
+  .bg-black,
+  .bg-slate-800 {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .text-white,
+  .text-slate-300,
+  .text-slate-400,
+  .text-slate-200 {
+    color: #1e293b !important;
+  }
+
+  /* Preserve essential status badges */
+  .bg-emerald-500\/10, .bg-emerald-100, .bg-emerald-50 {
+    background-color: #e6f4ea !important;
+    color: #137333 !important;
+    border: 1px solid #ceead6 !important;
+  }
+
+  .bg-rose-500\/10, .bg-rose-100, .bg-rose-50 {
+    background-color: #fce8e6 !important;
+    color: #c5221f !important;
+    border: 1px solid #fad2cf !important;
+  }
+
+  .bg-amber-500\/10, .bg-amber-100, .bg-amber-50 {
+    background-color: #fef7e0 !important;
+    color: #b06000 !important;
+    border: 1px solid #feefc3 !important;
+  }
+
+  .bg-indigo-500\/10, .bg-indigo-100, .bg-indigo-50 {
+    background-color: #e8f0fe !important;
+    color: #1a73e8 !important;
+    border: 1px solid #d2e3fc !important;
+  }
+
+  /* Table formatting for clean printable documents */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tbody {
+    display: table-row-group !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 6px 8px !important;
+    font-size: 9.5pt !important;
+    color: #0f172a !important;
+    background: #ffffff !important;
+  }
+
+  th {
+    background-color: #f8fafc !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 8.5pt !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  /* Prevent cards from breaking across page breaks */
+  .card,
+  .rounded-2xl,
+  .rounded-3xl,
+  .rounded-xl,
+  section,
+  article,
+  .print-avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .print-break-before {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  .print-break-after {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+}
+

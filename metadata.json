@@ -1,0 +1,8 @@
+{
+  "name": "AppAss",
+  "description": "Gestionnaire d'association sportive complet permettant d'administrer les membres, équipes, séances d'entraînement et plannings dans une interface moderne et réactive.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
